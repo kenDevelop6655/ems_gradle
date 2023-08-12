@@ -22,7 +22,7 @@
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="infra.mbgSql"  targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.example.ems_gradle.infra.mbgMapper"  targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
