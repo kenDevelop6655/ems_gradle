@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{add}" th:object="${equipForm}" method="POST">
+    <!-- text -->
+    <ul>
+        <li>
+<!--        備品名-->
+        <label class="control-label" for="equipName">equip_name</label>
+        <input type="text" id="equipName" name="equipName" th:field="*{equipName}" />
+        <span th:if="${#fields.hasErrors('equipName')}" th:errors="*{equipName}">error!</span>
+        </li>
+        <li>
+<!--        備品タイプ-->
+        <label class="control-label" for="equipType">equip_type</label>
+        <select id="equipType" name="equipType">
+            <option th:each="equipType : ${equipTypeList}" th:value="${equipType.equipTypeId}" th:text="${equipType.equipType}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('equipName')}" th:errors="*{equipName}">error!</span>
+        </li>
+    </ul>
+    <button type="submit">登録</button>
+</form>
+
+</body>
+</html>
