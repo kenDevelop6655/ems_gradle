@@ -5,11 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/content.css}" rel="stylesheet">
 </head>
 <body>
+
+<h1 th:text="${title}">タイトル</h1>
+
+<th:block th:each="equip :${equipList}">
+    <ul>
+       <li >
+           <a th:text="${equip.equipName}" th:href="@{/equip(id=${equip.equipId})}"></a>
+       </li>
+    </ul>
+</th:block>
+<br>
+
 <div>
-    <h1 th:text="${sample}">例</h1>
-    <a th:href="@{/equip/addForm}">add equip</a>
+    <a th:href="@{/equip/addForm}"  th:text="add_equip">add equip</a>
 </div>
 </body>
 </html>

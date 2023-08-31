@@ -6,28 +6,50 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 
-<form th:action="@{add}" th:object="${equipForm}" method="POST">
+<body>
+<h1 th:text="${title}">タイトル</h1>
+<form th:action="@{/equip/add}" th:object="${equip}" method="POST">
     <!-- text -->
     <ul>
         <li>
-<!--        備品名-->
-        <label class="control-label" for="equipName">equip_name</label>
-        <input type="text" id="equipName" name="equipName" th:field="*{equipName}" />
-        <span th:if="${#fields.hasErrors('equipName')}" th:errors="*{equipName}">error!</span>
+            <label for="equipName">備品名</label>
+            <input type="text" id="equipName" name="equipName">
+            <p th:errors="*{equipName}"></p>
         </li>
         <li>
-<!--        備品タイプ-->
-        <label class="control-label" for="equipType">equip_type</label>
-        <select id="equipType" name="equipType">
-            <option th:each="equipType : ${equipTypeList}" th:value="${equipType.equipTypeId}" th:text="${equipType.equipType}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('equipName')}" th:errors="*{equipName}">error!</span>
+            <label for="equipTypeId">備品タイプ</label>
+            <select id="equipTypeId" name="equipTypeId">
+            <option th:each="equipType:${equipTypeList}" th:value="${equipType.value}" th:text="${equipType.name}"></option>
+            </select>
+        </li>
+<!--        todo所有者の数字の変換どうにかする-->
+        <li>
+            <label for="ownerId">所有者</label>
+            <input type="text" id="ownerId" name="ownerId" />
+        </li>
+<!--        todo日付型をどうにかする-->
+        <li>
+            <label for="purchaseDate">購入日</label>
+            <input type="date" id="purchaseDate" name="purchaseDate" />
+        </li>
+        <li>
+            <label for="equipManageCode">備品管理コード</label>
+            <input type="text" id="equipManageCode" name="equipManageCode" />
+        </li>
+        <li>
+            <label for="location">使用場所</label>
+            <input type="text" id="location" name="location" />
+        </li>
+        <li>
+            <label for="note">備考</label>
+            <input type="text" id="note" name="note" />
         </li>
     </ul>
     <button type="submit">登録</button>
 </form>
+<br>
+<a th:href="@{/equip}"  th:text="home">home</a>
 
 </body>
 </html>

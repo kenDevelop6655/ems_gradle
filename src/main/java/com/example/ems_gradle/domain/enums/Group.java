@@ -5,9 +5,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Role {
-    GENERAL("1", "一般ユーザ"),
-    ADMIN("2", "管理者");
+public enum Group {
+
+    SECTION("1", "課"),
+    DIVISION("2", "部");
 
     private final String value;
     private final String label;

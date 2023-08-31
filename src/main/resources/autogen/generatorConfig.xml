@@ -8,7 +8,7 @@
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="org.postgresql.Driver"
-                        connectionURL="jdbc:postgresql://localhost:5432/ems_manual"
+                        connectionURL="jdbc:postgresql://localhost:5432/ems_auto"
                         userId="postgres"
                         password="pass">
         </jdbcConnection>
@@ -30,7 +30,38 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="ems" tableName="%"></table>
-
+        <table schema="ems" tableName="cancel">
+            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="confirm">
+            <generatedKey column="confirm_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="delete">
+            <generatedKey column="delete_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="division_user">
+            <generatedKey column="emp_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="edit">
+            <generatedKey column="edit_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="equip">
+            <generatedKey column="equip_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="first_approve">
+            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="receive">
+            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="request">
+            <generatedKey column="request_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="second_approve">
+            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+        </table>
+        <table schema="ems" tableName="section_user">
+            <generatedKey column="emp_id" sqlStatement="JDBC"/>
+        </table>
     </context>
 </generatorConfiguration>

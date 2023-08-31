@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum Role {
-    GENERAL("1", "一般ユーザ"),
-    ADMIN("2", "管理者");
+public enum Section {
+    DENSOL1("1", "電力ソリューション第1部"),
+    DENSOL2("2", "電力ソリューション第2部");
 
     private final String value;
     private final String label;

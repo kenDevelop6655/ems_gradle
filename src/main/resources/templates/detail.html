@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/content.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 th:text="${title}">タイトル</h1>
+
+<table th:object="${equip}">
+    <tr>
+        <th class="cell_title">Id</th>
+        <th class="cell_required"></th>
+        <td th:text="*{equipId}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">タイプId</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{equipTypeId}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">所有者</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{ownerId}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">購入日</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{purchaseDate}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">備品管理コード</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{equipManageCode}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">備品名</th>
+        <th class="cell_required">※</th>
+        <td><input type="text" th:field="*{equipName}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">使用場所</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{location}"></td>
+    </tr>
+    <tr>
+        <th class="cell_title">備考</th>
+        <th class="cell_required"></th>
+        <td><input type="text" th:field="*{note}"></td>
+    </tr>
+</table>
+<br>
+<a th:href="@{/equip}"  th:text="home">home</a>
+<br>
+<br>
+<form th:action="@{/equip/delete(id=${equip.equipId})}" th:object="${equip}" method="POST">
+    <input type="submit" value="削除">
+</form>
+
+</body>
+</html>
