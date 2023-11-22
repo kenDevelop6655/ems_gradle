@@ -1,10 +1,13 @@
 package com.example.ems_gradle.presentation.controller;
 
 import com.example.ems_gradle.app.service.EquipService;
+import com.example.ems_gradle.domain.dto.AddDto;
+import com.example.ems_gradle.domain.dto.DeleteDto;
+import com.example.ems_gradle.domain.dto.EditDto;
 import com.example.ems_gradle.domain.enums.EquipType;
 import com.example.ems_gradle.domain.mbgModel.ems.Equip;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +24,15 @@ import java.util.List;
 public class EquipController {
 
     private final EquipService equipService;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public EquipController(
-            EquipService equipService
+            EquipService equipService,
+            ModelMapper modelMapper
     ){
         this.equipService=equipService;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -40,24 +46,14 @@ public class EquipController {
         return "home";
     }
 
-    //詳細画面の表示
-    @RequestMapping(path = "", params = {"id"})
-    String detail(
-            @RequestParam("id") int id,
-            Model model){
-        Equip equip = equipService.selectById(id);
-        model.addAttribute("title","詳細画面");
-        model.addAttribute("equip",equip);
-        return "detail";
-    }
 
 
     //備品の追加画面の表示
     @RequestMapping("addForm")
     String addForm(Model model){
-        Equip equip = new Equip();
+        AddDto addDto = new AddDto();
         model.addAttribute("title","備品登録画面");
-        model.addAttribute("equip",equip);
+        model.addAttribute("addDto",addDto);
         model.addAttribute("equipTypeList", EquipType.values());
         return "add_form";
     }
@@ -65,7 +61,7 @@ public class EquipController {
     //備品の追加
     @RequestMapping("add")
     String insertEquip(
-            @Validated Equip equip,
+            @Validated AddDto addDto,
             BindingResult bindingResult,
             Model model){
         if (bindingResult.hasErrors()){
@@ -74,7 +70,40 @@ public class EquipController {
             return "add_form";
         }
         model.addAttribute("title","完了画面");
-        equipService.insertEquip(equip);
+        equipService.insertEquip(addDto);
+        return "complete";
+    }
+
+
+    //詳細画面の表示
+    @RequestMapping(path = "", params = {"id"})
+    String detail(
+            @RequestParam("id") int id,
+            Model model){
+        Equip equip = equipService.selectById(id);
+        EditDto editDto = modelMapper.map(equip,EditDto.class);
+        model.addAttribute("title","詳細画面");
+        model.addAttribute("editDto",editDto);
+        model.addAttribute("id",id);
+        return "detail";
+    }
+
+
+    //備品の編集
+    @RequestMapping(path="edit", params = {"id"})
+    String insertEquip(
+            @RequestParam("id") int id,
+            @Validated EditDto editDto,
+            BindingResult bindingResult,
+            Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("title","備品編集画面");
+            model.addAttribute("equipTypeList", EquipType.values());
+            model.addAttribute("id",id);
+            return "detail";
+        }
+        model.addAttribute("title","完了画面");
+        equipService.editEquip(id,editDto);
         return "complete";
     }
 
@@ -82,9 +111,10 @@ public class EquipController {
     @RequestMapping(path = "delete", params = {"id"})
     String deleteEquip(
             Model model,
+            DeleteDto deleteDto,
             @RequestParam("id") int id
     ){
-        equipService.deleteById(id);
+        equipService.deleteById(id,deleteDto);
         return "redirect:/equip";
     }
 }

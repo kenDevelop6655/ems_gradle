@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="org.postgresql.Driver"
@@ -30,8 +29,11 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
+        <table schema="ems" tableName="add">
+            <generatedKey column="add_id" sqlStatement="JDBC"/>
+        </table>
         <table schema="ems" tableName="cancel">
-            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+            <generatedKey column="request_cancel_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="confirm">
             <generatedKey column="confirm_id" sqlStatement="JDBC"/>
@@ -49,16 +51,16 @@
             <generatedKey column="equip_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="first_approve">
-            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+            <generatedKey column="request_first_approve_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="receive">
-            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+            <generatedKey column="request_receive_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="request">
             <generatedKey column="request_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="second_approve">
-            <generatedKey column="request_activity_id" sqlStatement="JDBC"/>
+            <generatedKey column="request_second_approve_id" sqlStatement="JDBC"/>
         </table>
         <table schema="ems" tableName="section_user">
             <generatedKey column="emp_id" sqlStatement="JDBC"/>

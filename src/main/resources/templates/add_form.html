@@ -9,7 +9,7 @@
 
 <body>
 <h1 th:text="${title}">タイトル</h1>
-<form th:action="@{/equip/add}" th:object="${equip}" method="POST">
+<form th:action="@{/equip/add}" th:object="${addDto}" method="POST">
     <!-- text -->
     <ul>
         <li>
